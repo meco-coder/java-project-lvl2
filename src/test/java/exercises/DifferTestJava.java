@@ -1,19 +1,19 @@
 package exercises;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.App;
-import hexlet.code.Differ;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
-
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import hexlet.code.App;
+//import hexlet.code.Differ;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//
+//import java.io.IOException;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+//import java.nio.file.Paths;
+//import java.util.Scanner;
+//
 //public class DifferTestJava {
 //    private static String data1;
 //    private static String data2;
@@ -40,7 +40,7 @@ import java.util.Scanner;
 //
 //    @Test
 //    void testGetDiffer1() throws IOException {
-//        String resultDiffer = Differ.generate(data1, data2);
+//        String resultDiffer = Differ.generate(data1, data2,"stylish");
 //        Assertions.assertEquals(expected, resultDiffer);
 //    }
 //}

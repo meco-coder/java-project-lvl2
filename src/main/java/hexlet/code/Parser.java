@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -11,10 +10,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.TreeMap;
 
-public class Parser {
-    private static TreeMap<Object, Object> mapFilePath;
+public class Parser<T1,T2> {
 
-    public static TreeMap<Object, Object> input(String file) throws IOException {
+    public TreeMap<T1, T2> input(String file) throws IOException {
+        TreeMap<T1, T2> mapFilePath = new TreeMap<>();
         Path filePath = Paths.get("src", "test", "resources", "fixtures", file).toAbsolutePath()
                 .normalize();
         String fileString = Files.readString(filePath).trim();

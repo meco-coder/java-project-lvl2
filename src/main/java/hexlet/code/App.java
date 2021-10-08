@@ -30,7 +30,12 @@ public class App implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        System.out.println(Differ.generate(file1, file2, format));
+        if (format.equals("stylish")) {
+            System.out.println(Differ.generate(file1,file2));
+
+        } else {
+            System.out.println(Differ.generate(file1, file2, format));
+        }
         return null;
     }
 }
