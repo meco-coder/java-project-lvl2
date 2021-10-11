@@ -37,6 +37,7 @@ public class Differ {
         result = Formatter.getResult(format);
         return result;
     }
+
     public static String generate(String filePath1, String filePath2) throws IOException {
         String format = "stylish";
         Parser<Object, Object> parser = new Parser<>();
@@ -48,7 +49,7 @@ public class Differ {
         sortedSet.addAll(setKeys1);
         for (Object key : sortedSet) {
             if (!mapFilePath1.containsKey(key)) {
-                Formatter.add(key, mapFilePath2.get(key),format);
+                Formatter.add(key, mapFilePath2.get(key), format);
             } else if (mapFilePath2.containsKey(key) && mapFilePath1.get(key) != null
                     && mapFilePath2.get(key) != null && mapFilePath1.get(key).equals(mapFilePath2.get(key))) {
                 Formatter.unchanged(key, mapFilePath1.get(key), format);

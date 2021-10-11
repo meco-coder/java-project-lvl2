@@ -6,15 +6,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 
 public class JsonFormatter {
-    private static String rr;
-    private static HashMap<Object,Object> result = new HashMap<>();
+    private static String resultToString;
+    private static HashMap<Object, Object> result = new HashMap<>();
 
     public static void differJson(Object key, Object value) throws JsonProcessingException {
-        result.put(key,value);
+        result.put(key, value);
         ObjectMapper objectMapper = new ObjectMapper();
-        rr = objectMapper.writeValueAsString(result);
+        resultToString = objectMapper.writeValueAsString(result);
     }
+
     public static String getResult() {
-        return rr;
+        result = new HashMap<>();
+        return resultToString;
     }
 }

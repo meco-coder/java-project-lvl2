@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public class PlainFormatter {
+    private static String resultToString;
     private static StringBuilder result = new StringBuilder();
 
     public static void add(Object key, Object value) {
@@ -45,8 +46,8 @@ public class PlainFormatter {
             }
         }
         if (value1 != null && value2 != null) {
-            if ((value1 instanceof Map || value1 instanceof Collection) &&
-                    (value2 instanceof Map || value2 instanceof Collection)) {
+            if ((value1 instanceof Map || value1 instanceof Collection)
+                    && (value2 instanceof Map || value2 instanceof Collection)) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append("[complex value]").append(" to ").append("[complex value]").append("\n");
             } else if (value1 instanceof String && value2 instanceof String) {
@@ -83,7 +84,9 @@ public class PlainFormatter {
     }
 
     public static String getResult() {
-        return result.toString();
+        resultToString = result.toString().trim();
+        result = new StringBuilder();
+        return resultToString;
     }
 
 }

@@ -1,5 +1,6 @@
 package hexlet.code;
 
+
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -17,10 +18,10 @@ public class App implements Callable<String> {
     private String format;
 
     @Parameters(paramLabel = "filepath1", description = "path to first file")
-    public String file1;
+    private String file1;
 
     @Parameters(paramLabel = "filepath2", description = "path to second file")
-    public String file2;
+    private String file2;
 
 
     public static void main(String... args) {
@@ -29,9 +30,9 @@ public class App implements Callable<String> {
     }
 
     @Override
-    public String call() throws Exception {
+    public final String call() throws Exception {
         if (format.equals("stylish")) {
-            System.out.println(Differ.generate(file1,file2));
+            System.out.println(Differ.generate(file1, file2));
 
         } else {
             System.out.println(Differ.generate(file1, file2, format));

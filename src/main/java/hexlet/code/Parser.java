@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.TreeMap;
 
-public class Parser<T1,T2> {
+public class Parser<T1, T2> {
 
-    public TreeMap<T1, T2> input(String file) throws IOException {
+    public final TreeMap<T1, T2> input(String file) throws IOException {
         TreeMap<T1, T2> mapFilePath = new TreeMap<>();
         Path filePath = Paths.get("src", "test", "resources", "fixtures", file).toAbsolutePath()
                 .normalize();

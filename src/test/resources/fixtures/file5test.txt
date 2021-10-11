@@ -1,0 +1,5 @@
+Property 'city' was updated. From null to 'Москва'
+Property 'firstName' was updated. From 'Иван' to 'Петр'
+Property 'postalCode' was updated. From 101101 to 101011
+Property 'streetAddress' was updated. From 'Московское ш., 101, кв.101' to null
+

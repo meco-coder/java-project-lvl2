@@ -1,0 +1,12 @@
+{
+ - city: null
+ + city: Москва
+ - firstName: Иван
+ + firstName: Петр
+   lastName: Иванов
+ - postalCode: 101101
+ + postalCode: 101011
+ - streetAddress: Московское ш., 101, кв.101
+ + streetAddress: null
+}
+
