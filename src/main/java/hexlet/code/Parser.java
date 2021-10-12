@@ -16,7 +16,6 @@ public class Parser<T1, T2> {
         TreeMap<T1, T2> mapFilePath = new TreeMap<>();
         Path filePath = Paths.get(file).toAbsolutePath().normalize();
         String fileString = Files.readString(filePath);
-        System.out.println(fileString);
         if (file.endsWith(".yml")) {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
