@@ -14,9 +14,9 @@ public class Parser<T1, T2> {
 
     public final TreeMap<T1, T2> input(String file) throws IOException {
         TreeMap<T1, T2> mapFilePath = new TreeMap<>();
-        Path filePath = Paths.get("src", "test", "resources", "fixtures", file).toAbsolutePath()
-                .normalize();
-        String fileString = Files.readString(filePath).trim();
+        Path filePath = Paths.get(file).toAbsolutePath().normalize();
+        String fileString = Files.readString(filePath);
+        System.out.println(fileString);
         if (file.endsWith(".yaml")) {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
