@@ -19,8 +19,10 @@ public class Formatter {
         }
     }
 
-    public static void unchanged(Object key, Object value) {
-        StylishFormatter.unchanged(key, value);
+    public static void unchanged(Object key, Object value, String format) {
+        if (format.equals("stylish")) {
+            StylishFormatter.unchanged(key, value);
+        }
     }
 
     public static void changed(Object key, Object value1, Object value2, String format) throws JsonProcessingException {

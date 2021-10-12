@@ -61,12 +61,14 @@ public class TestDiffer {
 
     @Test
     public void differTest2() throws IOException {
-        Assertions.assertEquals(fileString1, Differ.generate("file1.json", "file2.json"));
-        Assertions.assertEquals(fileString2, Differ.generate("file1test.json", "file2test.json"));
         Assertions.assertEquals(fileString3, Differ.generate("file3test.json", "file4test.json"));
-        Assertions.assertEquals(fileString1, Differ.generate("file1.yml", "file2.yml"));
-        Assertions.assertEquals(fileString2, Differ.generate("file1test.yml", "file2test.yml"));
+        Assertions.assertEquals(fileString3, Differ.generate("file3test.json", "file4test.json","stylish"));
+        Assertions.assertEquals(fileString6, Differ.generate("file3test.json", "file4test.json", "plain"));
+        Assertions.assertEquals(fileString9, Differ.generate("file3test.json", "file4test.json", "json"));
         Assertions.assertEquals(fileString3, Differ.generate("file3test.yml", "file4test.yml"));
+        Assertions.assertEquals(fileString3, Differ.generate("file3test.yml", "file4test.yml","stylish"));
+        Assertions.assertEquals(fileString6, Differ.generate("file3test.yml", "file4test.yml", "plain"));
+        Assertions.assertEquals(fileString9, Differ.generate("file3test.yml", "file4test.yml", "json"));
     }
 
     @Test
