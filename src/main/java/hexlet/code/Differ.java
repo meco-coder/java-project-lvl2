@@ -21,10 +21,10 @@ public class Differ {
                 Formatter.add(key, mapFilePath2.get(key), format);
             } else if (mapFilePath2.containsKey(key) && mapFilePath1.get(key) != null
                     && mapFilePath2.get(key) != null && mapFilePath1.get(key).equals(mapFilePath2.get(key))) {
-                Formatter.unchanged(key, mapFilePath1.get(key), format);
+                Formatter.unchanged(key, mapFilePath1.get(key));
             } else if (mapFilePath2.containsKey(key) && mapFilePath1.get(key) == null
                     && mapFilePath2.get(key) == null) {
-                Formatter.unchanged(key, mapFilePath1.get(key), format);
+                Formatter.unchanged(key, mapFilePath1.get(key));
             } else if (mapFilePath2.containsKey(key)
                     && (mapFilePath1.get(key) == null || mapFilePath2.get(key) == null)) {
                 Formatter.changed(key, mapFilePath1.get(key), mapFilePath2.get(key), format);

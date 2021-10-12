@@ -19,7 +19,7 @@ public class Formatter {
         }
     }
 
-    public static void unchanged(Object key, Object value, String format) {
+    public static void unchanged(Object key, Object value) {
         StylishFormatter.unchanged(key, value);
     }
 
