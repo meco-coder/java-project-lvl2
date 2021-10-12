@@ -16,13 +16,13 @@ public class Parser<T1, T2> {
         TreeMap<T1, T2> mapFilePath = new TreeMap<>();
         Path filePath = Paths.get(file).toAbsolutePath().normalize();
         String fileString = Files.readString(filePath);
-        if (file.endsWith(".yml")) {
+        if (file.endsWith(".ymls")) {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
             mapFilePath = mapper.readValue(fileString, new TypeReference<>() {
             });
             return mapFilePath;
-        } else if (file.endsWith(".json")) {
+        } else if (file.endsWith(".jsons")) {
             ObjectMapper mapper = new ObjectMapper();
             mapFilePath = mapper.readValue(fileString, new TypeReference<>() {
             });
