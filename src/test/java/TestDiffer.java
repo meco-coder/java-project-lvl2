@@ -61,9 +61,9 @@ public class TestDiffer {
 
     @Test
     public void differTest2() throws IOException {
-        Assertions.assertEquals(fileString1, Differ.generate("file1.yaml", "file2.yaml"));
-        Assertions.assertEquals(fileString2, Differ.generate("file1test.yaml", "file2test.yaml"));
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.yaml", "file4test.yaml"));
+        Assertions.assertEquals(fileString1, Differ.generate("file1.yml", "file2.yml"));
+        Assertions.assertEquals(fileString2, Differ.generate("file1test.yml", "file2test.yml"));
+        Assertions.assertEquals(fileString3, Differ.generate("file3test.yml", "file4test.yml"));
     }
 
     @Test
@@ -75,9 +75,9 @@ public class TestDiffer {
 
     @Test
     public void differTest4() throws IOException {
-        Assertions.assertEquals(fileString4, Differ.generate("file1.yaml", "file2.yaml", "plain"));
-        Assertions.assertEquals(fileString5, Differ.generate("file1test.yaml", "file2test.yaml", "plain"));
-        Assertions.assertEquals(fileString6, Differ.generate("file3test.yaml", "file4test.yaml", "plain"));
+        Assertions.assertEquals(fileString4, Differ.generate("file1.yml", "file2.yml", "plain"));
+        Assertions.assertEquals(fileString5, Differ.generate("file1test.yml", "file2test.yml", "plain"));
+        Assertions.assertEquals(fileString6, Differ.generate("file3test.yml", "file4test.yml", "plain"));
     }
     @Test
     public void differTest5() throws IOException {
@@ -88,9 +88,9 @@ public class TestDiffer {
 
     @Test
     public void differTest6() throws IOException {
-        Assertions.assertEquals(fileString7, Differ.generate("file1.yaml", "file2.yaml", "json"));
-        Assertions.assertEquals(fileString8, Differ.generate("file1test.yaml", "file2test.yaml", "json"));
-        Assertions.assertEquals(fileString9, Differ.generate("file3test.yaml", "file4test.yaml", "json"));
+        Assertions.assertEquals(fileString7, Differ.generate("file1.yml", "file2.yml", "json"));
+        Assertions.assertEquals(fileString8, Differ.generate("file1test.yml", "file2test.yml", "json"));
+        Assertions.assertEquals(fileString9, Differ.generate("file3test.yml", "file4test.yml", "json"));
     }
 
 }
