@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Map;
 
 public class PlainFormatter {
-    private static String resultToString;
     private static StringBuilder result = new StringBuilder();
 
     public static void add(Object key, Object value) {
@@ -84,7 +83,7 @@ public class PlainFormatter {
     }
 
     public static String getResult() {
-        resultToString = result.toString().trim();
+        String resultToString = result.toString().trim();
         result = new StringBuilder();
         return resultToString;
     }

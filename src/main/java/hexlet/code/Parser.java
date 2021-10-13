@@ -13,21 +13,27 @@ import java.util.TreeMap;
 public class Parser<T1, T2> {
 
     public final TreeMap<T1, T2> input(String file) throws IOException {
-        TreeMap<T1, T2> mapFilePath = new TreeMap<>();
-        Path filePath = Paths.get(file).toAbsolutePath().normalize();
-        String fileString = Files.readString(filePath);
+        String fileToString = "";
+        TreeMap<T1, T2> mapFile = new TreeMap<>();
+        Path fileForParse = Paths.get(file).normalize();
+        if (!fileForParse.isAbsolute()) {
+            fileForParse = Paths.get("src", "test", "resources", "fixtures", file)
+                    .toAbsolutePath()
+                    .normalize();
+        }
+        fileToString = Files.readString(fileForParse);
         if (file.endsWith(".yml")) {
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
             mapper.findAndRegisterModules();
-            mapFilePath = mapper.readValue(fileString, new TypeReference<>() {
+            mapFile = mapper.readValue(fileToString, new TypeReference<>() {
             });
-            return mapFilePath;
+            return mapFile;
         } else if (file.endsWith(".json")) {
             ObjectMapper mapper = new ObjectMapper();
-            mapFilePath = mapper.readValue(fileString, new TypeReference<>() {
+            mapFile = mapper.readValue(fileToString, new TypeReference<>() {
             });
-            return mapFilePath;
+            return mapFile;
         }
-        return mapFilePath;
+        return mapFile;
     }
 }
