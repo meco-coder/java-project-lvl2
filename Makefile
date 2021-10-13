@@ -30,3 +30,6 @@ check-updates:
 build-run: build run
 
 .PHONY: build
+
+test-coverage:
+	npm test -- --coverage
