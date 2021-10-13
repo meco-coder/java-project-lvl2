@@ -15,7 +15,7 @@ jobs:
         with:
           java-version: '11'
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v2.7.5
         env:
           # Set CC_TEST_REPORTER_ID as secret of your repo
           CC_TEST_REPORTER_ID: ${{secrets.TEST_COVERAGE}}
