@@ -13,12 +13,12 @@ jobs:
       - name: Set up openJDK
         uses: actions/setup-java@v1
         with:
-          java-version: '16'
+          java-version: '11'
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           # Set CC_TEST_REPORTER_ID as secret of your repo
-          CC_TEST_REPORTER_ID: ${{secrets.TEST_COVERAGE }}
+          CC_TEST_REPORTER_ID: ${{secrets.TEST_COVERAGE}}
           JACOCO_SOURCE_PATH: "${{github.workspace}}/src/main/java"
           with:
           # The report file must be there, otherwise Code Climate won't find it
