@@ -1,0 +1,1 @@
+{"chars4":null,"key1":null,"setting2":"300","chars3":"d","key2":"value2","setting3":"none","chars2":false,"setting1":"Another value","numbers4":[4,5,6],"key3":null,"numbers3":2,"setting4":1,"key4":["one","two"],"numbers2":[22,33,44,55],"obj1":"obj","default":["value1","value2"],"name":false,"checked":true,"id":"45"}

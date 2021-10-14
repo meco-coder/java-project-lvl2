@@ -9,94 +9,87 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TestDiffer {
-    private static String fileString1;
-    private static String fileString2;
-    private static String fileString3;
-    private static String fileString4;
-    private static String fileString5;
-    private static String fileString6;
-    private static String fileString7;
-    private static String fileString8;
-    private static String fileString9;
+    private static String stringResultFile1File2Stylish;
+    private static String stringResultFile3File4Stylish;
+    private static String stringResultFile5File6Stylish;
+    private static String stringResultFile1File2Plain;
+    private static String stringResultFile3File4Plain;
+    private static String stringResultFile5File6Plain;
+    private static String stringResultFile1File2Json;
+    private static String stringResultFile3File4Json;
+    private static String stringResultFile5File6Json;
 
     @BeforeAll
     public static void inputTest() throws IOException {
-        Path filePath1 = Paths.get("src", "test", "resources", "fixtures", "file1test.txt").toAbsolutePath()
+        Path pathResult = Paths.get("src", "test", "resources", "fixtures", "result_file1_file2_stylish.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString1 = Files.readString(filePath1).trim();
-        Path filePath2 = Paths.get("src", "test", "resources", "fixtures", "file2test.txt").toAbsolutePath()
+        stringResultFile1File2Stylish = Files.readString(pathResult).trim();
+        Path filePath1 = Paths.get("src", "test", "resources", "fixtures", "result_file3_file4_stylish.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString2 = Files.readString(filePath2).trim();
-        Path filePath3 = Paths.get("src", "test", "resources", "fixtures", "file3test.txt").toAbsolutePath()
+        stringResultFile3File4Stylish = Files.readString(filePath1).trim();
+        Path filePath2 = Paths.get("src", "test", "resources", "fixtures", "result_file5_file6_stylish.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString3 = Files.readString(filePath3).trim();
+        stringResultFile5File6Stylish = Files.readString(filePath2).trim();
 
-        Path filePath4 = Paths.get("src", "test", "resources", "fixtures", "file4test.txt").toAbsolutePath()
+        Path filePath3 = Paths.get("src", "test", "resources", "fixtures", "result_file1_file2_plain.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString4 = Files.readString(filePath4).trim();
-        Path filePath5 = Paths.get("src", "test", "resources", "fixtures", "file5test.txt").toAbsolutePath()
+        stringResultFile1File2Plain = Files.readString(filePath3).trim();
+        Path filePath4 = Paths.get("src", "test", "resources", "fixtures", "result_file3_file4_plain.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString5 = Files.readString(filePath5).trim();
-        Path filePath6 = Paths.get("src", "test", "resources", "fixtures", "file6test.txt").toAbsolutePath()
+        stringResultFile3File4Plain = Files.readString(filePath4).trim();
+        Path filePath5 = Paths.get("src", "test", "resources", "fixtures", "result_file5_file6_plain.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString6 = Files.readString(filePath6).trim();
-        Path filePath7 = Paths.get("src", "test", "resources", "fixtures", "file7test.txt").toAbsolutePath()
+        stringResultFile5File6Plain = Files.readString(filePath5).trim();
+        Path filePath6 = Paths.get("src", "test", "resources", "fixtures", "result_file1_file2_json.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString7 = Files.readString(filePath7).trim();
-        Path filePath8 = Paths.get("src", "test", "resources", "fixtures", "file8test.txt").toAbsolutePath()
+        stringResultFile1File2Json = Files.readString(filePath6).trim();
+        Path filePath7 = Paths.get("src", "test", "resources", "fixtures", "result_file3_file4_json.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString8 = Files.readString(filePath8).trim();
-        Path filePath9 = Paths.get("src", "test", "resources", "fixtures", "file9test.txt").toAbsolutePath()
+        stringResultFile3File4Json = Files.readString(filePath7).trim();
+        Path filePath8 = Paths.get("src", "test", "resources", "fixtures", "result_file5_file6_json.txt")
+                .toAbsolutePath()
                 .normalize();
-        fileString9 = Files.readString(filePath9).trim();
+        stringResultFile5File6Json = Files.readString(filePath8).trim();
 
     }
 
     @Test
-    public void differTest1() throws IOException {
-        Assertions.assertEquals(fileString1, Differ.generate("file1.json", "file2.json"));
-        Assertions.assertEquals(fileString2, Differ.generate("file1test.json", "file2test.json"));
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.json", "file4test.json"));
+    public void differTestJson() throws IOException {
+        Assertions.assertEquals(stringResultFile1File2Stylish, Differ.generate("file1.json", "file2.json"));
+        Assertions.assertEquals(stringResultFile1File2Stylish, Differ.generate("file1.json", "file2.json", "stylish"));
+        Assertions.assertEquals(stringResultFile1File2Plain, Differ.generate("file1.json", "file2.json", "plain"));
+        Assertions.assertEquals(stringResultFile1File2Json, Differ.generate("file1.json", "file2.json", "json"));
+        Assertions.assertEquals(stringResultFile3File4Stylish, Differ.generate("file3.json", "file4.json"));
+        Assertions.assertEquals(stringResultFile3File4Stylish, Differ.generate("file3.json", "file4.json", "stylish"));
+        Assertions.assertEquals(stringResultFile3File4Plain, Differ.generate("file3.json", "file4.json", "plain"));
+        Assertions.assertEquals(stringResultFile3File4Json, Differ.generate("file3.json", "file4.json", "json"));
+        Assertions.assertEquals(stringResultFile5File6Stylish, Differ.generate("file5.json", "file6.json"));
+        Assertions.assertEquals(stringResultFile5File6Stylish, Differ.generate("file5.json", "file6.json", "stylish"));
+        Assertions.assertEquals(stringResultFile5File6Plain, Differ.generate("file5.json", "file6.json", "plain"));
+        Assertions.assertEquals(stringResultFile5File6Json, Differ.generate("file5.json", "file6.json", "json"));
     }
 
     @Test
-    public void differTest2() throws IOException {
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.json", "file4test.json"));
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.json", "file4test.json", "stylish"));
-        Assertions.assertEquals(fileString6, Differ.generate("file3test.json", "file4test.json", "plain"));
-        Assertions.assertEquals(fileString9, Differ.generate("file3test.json", "file4test.json", "json"));
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.yml", "file4test.yml"));
-        Assertions.assertEquals(fileString3, Differ.generate("file3test.yml", "file4test.yml", "stylish"));
-        Assertions.assertEquals(fileString6, Differ.generate("file3test.yml", "file4test.yml", "plain"));
-        Assertions.assertEquals(fileString9, Differ.generate("file3test.yml", "file4test.yml", "json"));
+    public void differTestYml() throws IOException {
+        Assertions.assertEquals(stringResultFile1File2Stylish, Differ.generate("file1.yml", "file2.yml"));
+        Assertions.assertEquals(stringResultFile1File2Stylish, Differ.generate("file1.yml", "file2.yml", "stylish"));
+        Assertions.assertEquals(stringResultFile1File2Plain, Differ.generate("file1.yml", "file2.yml", "plain"));
+        Assertions.assertEquals(stringResultFile1File2Json, Differ.generate("file1.yml", "file2.yml", "json"));
+        Assertions.assertEquals(stringResultFile3File4Stylish, Differ.generate("file3.yml", "file4.yml"));
+        Assertions.assertEquals(stringResultFile3File4Stylish, Differ.generate("file3.yml", "file4.yml", "stylish"));
+        Assertions.assertEquals(stringResultFile3File4Plain, Differ.generate("file3.yml", "file4.yml", "plain"));
+        Assertions.assertEquals(stringResultFile3File4Json, Differ.generate("file3.yml", "file4.yml", "json"));
+        Assertions.assertEquals(stringResultFile5File6Stylish, Differ.generate("file5.yml", "file6.yml"));
+        Assertions.assertEquals(stringResultFile5File6Stylish, Differ.generate("file5.yml", "file6.yml", "stylish"));
+        Assertions.assertEquals(stringResultFile5File6Plain, Differ.generate("file5.yml", "file6.yml", "plain"));
+        Assertions.assertEquals(stringResultFile5File6Json, Differ.generate("file5.yml", "file6.yml", "json"));
     }
-
-    @Test
-    public void differTest3() throws IOException {
-        Assertions.assertEquals(fileString4, Differ.generate("file1.json", "file2.json", "plain"));
-        Assertions.assertEquals(fileString5, Differ.generate("file1test.json", "file2test.json", "plain"));
-        Assertions.assertEquals(fileString6, Differ.generate("file3test.json", "file4test.json", "plain"));
-    }
-
-    @Test
-    public void differTest4() throws IOException {
-        Assertions.assertEquals(fileString4, Differ.generate("file1.yml", "file2.yml", "plain"));
-        Assertions.assertEquals(fileString5, Differ.generate("file1test.yml", "file2test.yml", "plain"));
-        Assertions.assertEquals(fileString6, Differ.generate("file3test.yml", "file4test.yml", "plain"));
-    }
-
-    @Test
-    public void differTest5() throws IOException {
-        Assertions.assertEquals(fileString7, Differ.generate("file1.json", "file2.json", "json"));
-        Assertions.assertEquals(fileString8, Differ.generate("file1test.json", "file2test.json", "json"));
-        Assertions.assertEquals(fileString9, Differ.generate("file3test.json", "file4test.json", "json"));
-    }
-
-    @Test
-    public void differTest6() throws IOException {
-        Assertions.assertEquals(fileString7, Differ.generate("file1.yml", "file2.yml", "json"));
-        Assertions.assertEquals(fileString8, Differ.generate("file1test.yml", "file2test.yml", "json"));
-        Assertions.assertEquals(fileString9, Differ.generate("file3test.yml", "file4test.yml", "json"));
-    }
-
 }

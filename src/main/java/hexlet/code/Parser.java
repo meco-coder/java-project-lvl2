@@ -12,7 +12,7 @@ import java.util.TreeMap;
 
 public class Parser<T1, T2> {
 
-    public final TreeMap<T1, T2> input(String file) throws IOException {
+    public final TreeMap<T1, T2> parserForFile1AndFile2(String file) throws IOException {
         String fileToString = "";
         TreeMap<T1, T2> mapFile = new TreeMap<>();
         Path fileForParse = Paths.get(file).normalize();

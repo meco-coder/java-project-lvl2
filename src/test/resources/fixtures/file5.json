@@ -2,14 +2,23 @@
   "setting1": "Some value",
   "setting2": 200,
   "setting3": true,
+  "setting4": "this value",
   "key1": "value1",
+  "key2": [123],
+  "key3": "value3",
+  "key4": "one",
   "numbers1": [1, 2, 3, 4],
   "numbers2": [2, 3, 4, 5],
-  "id": 45,
+  "numbers3": [2, 3, 5, 5],
+  "numbers4": 21,
+  "id": null,
+  "name": null,
   "default": null,
   "checked": false,
   "numbers3": [3, 4, 5],
   "chars1": ["a", "b", "c"],
-  "chars2": ["d", "e", "f"]
+  "chars2": ["d", "e", "f"],
+  "chars3": ["d", "e", "f"],
+  "chars4": "f"
 }
 

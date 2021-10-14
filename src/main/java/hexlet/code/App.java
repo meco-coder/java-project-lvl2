@@ -35,9 +35,8 @@ public class App implements Callable<String> {
     public final String call() throws Exception {
         if (format.equals("stylish")) {
             result = Differ.generate(filePath1, filePath2);
-
         }
         result = Differ.generate(filePath1, filePath2, format);
-        return null;
+        return result;
     }
 }

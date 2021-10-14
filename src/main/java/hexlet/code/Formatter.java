@@ -25,17 +25,17 @@ public class Formatter {
         }
     }
 
-    public static void changed(Object key, Object value1, Object value2, String format) throws JsonProcessingException {
+    public static void changed(Object key, Object valueFile1, Object valueFile2, String format) throws JsonProcessingException {
         switch (format) {
             case "plain":
-                PlainFormatter.updated(key, value1, value2);
+                PlainFormatter.updated(key, valueFile1, valueFile2);
                 break;
             case "json":
-                JsonFormatter.differJson(key, value1);
-                JsonFormatter.differJson(key, value2);
+                JsonFormatter.differJson(key, valueFile1);
+                JsonFormatter.differJson(key, valueFile2);
                 break;
             default:
-                StylishFormatter.change(key, value1, value2);
+                StylishFormatter.change(key, valueFile1, valueFile2);
 
         }
     }

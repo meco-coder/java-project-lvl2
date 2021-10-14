@@ -19,61 +19,61 @@ public class PlainFormatter {
         }
     }
 
-    public static void updated(Object key, Object value1, Object value2) {
-        if (value1 == null) {
-            if (value2 instanceof Map || value2 instanceof Collection) {
+    public static void updated(Object key, Object valueFile1, Object valueFile2) {
+        if (valueFile1 == null) {
+            if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append((Object) null).append(" to ").append("[complex value]").append("\n");
-            } else if (value2 instanceof String) {
+            } else if (valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append((Object) null).append(" to ").append("'").append(value2).append("'").append("\n");
+                        .append((Object) null).append(" to ").append("'").append(valueFile2).append("'").append("\n");
             } else {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append((Object) null).append(" to ").append(value2).append("\n");
+                        .append((Object) null).append(" to ").append(valueFile2).append("\n");
             }
         }
-        if (value2 == null) {
-            if (value1 instanceof Map || value1 instanceof Collection) {
+        if (valueFile2 == null) {
+            if (valueFile1 instanceof Map || valueFile1 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append("[complex value]").append(" to ").append((Object) null).append("\n");
-            } else if (value1 instanceof String) {
+            } else if (valueFile1 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(value1).append("'").append(" to ").append((Object) null).append("\n");
+                        .append("'").append(valueFile1).append("'").append(" to ").append((Object) null).append("\n");
             } else {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(value1).append(" to ").append((Object) null).append("\n");
+                        .append(valueFile1).append(" to ").append((Object) null).append("\n");
             }
         }
-        if (value1 != null && value2 != null) {
-            if ((value1 instanceof Map || value1 instanceof Collection)
-                    && (value2 instanceof Map || value2 instanceof Collection)) {
+        if (valueFile1 != null && valueFile2 != null) {
+            if ((valueFile1 instanceof Map || valueFile1 instanceof Collection)
+                    && (valueFile2 instanceof Map || valueFile2 instanceof Collection)) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append("[complex value]").append(" to ").append("[complex value]").append("\n");
-            } else if (value1 instanceof String && value2 instanceof String) {
+            } else if (valueFile1 instanceof String && valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(value1).append("'").append(" to ").append("'").append(value2).append("'")
+                        .append("'").append(valueFile1).append("'").append(" to ").append("'").append(valueFile2).append("'")
                         .append("\n");
-            } else if ((value1 instanceof Map || value1 instanceof Collection) && value2 instanceof String) {
+            } else if ((valueFile1 instanceof Map || valueFile1 instanceof Collection) && valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append("'").append(value2).append("'").append("\n");
-            } else if (value1 instanceof Map || value1 instanceof Collection) {
+                        .append("[complex value]").append(" to ").append("'").append(valueFile2).append("'").append("\n");
+            } else if (valueFile1 instanceof Map || valueFile1 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append(value2).append("\n");
-            } else if ((value2 instanceof Map || value2 instanceof Collection) && value1 instanceof String) {
+                        .append("[complex value]").append(" to ").append(valueFile2).append("\n");
+            } else if ((valueFile2 instanceof Map || valueFile2 instanceof Collection) && valueFile1 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(value1).append("'").append(" to ").append("[complex value]").append("\n");
-            } else if (value2 instanceof Map || value2 instanceof Collection) {
+                        .append("'").append(valueFile1).append("'").append(" to ").append("[complex value]").append("\n");
+            } else if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(value1).append(" to ").append("[complex value]").append("\n");
-            } else if (value1 instanceof String) {
+                        .append(valueFile1).append(" to ").append("[complex value]").append("\n");
+            } else if (valueFile1 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(value1).append("'").append(" to ").append(value2).append("\n");
-            } else if (value2 instanceof String) {
+                        .append("'").append(valueFile1).append("'").append(" to ").append(valueFile2).append("\n");
+            } else if (valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(value1).append(" to ").append("'").append(value2).append("'").append("\n");
+                        .append(valueFile1).append(" to ").append("'").append(valueFile2).append("'").append("\n");
             } else {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(value1).append(" to ").append(value2).append("\n");
+                        .append(valueFile1).append(" to ").append(valueFile2).append("\n");
             }
         }
     }

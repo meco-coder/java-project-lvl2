@@ -1,0 +1,19 @@
+Property 'chars2' was updated. From [complex value] to false
+Property 'chars3' was updated. From [complex value] to 'd'
+Property 'chars4' was updated. From 'f' to null
+Property 'checked' was updated. From false to true
+Property 'default' was updated. From null to [complex value]
+Property 'id' was updated. From null to '45'
+Property 'key1' was updated. From 'value1' to null
+Property 'key2' was updated. From [complex value] to 'value2'
+Property 'key3' was updated. From 'value3' to null
+Property 'key4' was updated. From 'one' to [complex value]
+Property 'name' was updated. From null to false
+Property 'numbers2' was updated. From [complex value] to [complex value]
+Property 'numbers3' was updated. From [complex value] to 2
+Property 'numbers4' was updated. From 21 to [complex value]
+Property 'obj1' was added with value: 'obj'
+Property 'setting1' was updated. From 'Some value' to 'Another value'
+Property 'setting2' was updated. From 200 to '300'
+Property 'setting3' was updated. From true to 'none'
+Property 'setting4' was updated. From 'this value' to 1
