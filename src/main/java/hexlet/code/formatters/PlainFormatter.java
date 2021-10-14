@@ -51,17 +51,22 @@ public class PlainFormatter {
                         .append("[complex value]").append(" to ").append("[complex value]").append("\n");
             } else if (valueFile1 instanceof String && valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append("'").append(valueFile2).append("'")
+                        .append("'").append(valueFile1).append("'").append(" to ").append("'").append(valueFile2)
+                        .append("'")
                         .append("\n");
-            } else if ((valueFile1 instanceof Map || valueFile1 instanceof Collection) && valueFile2 instanceof String) {
+            } else if ((valueFile1 instanceof Map || valueFile1 instanceof Collection)
+                    && valueFile2 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append("'").append(valueFile2).append("'").append("\n");
+                        .append("[complex value]").append(" to ").append("'").append(valueFile2).append("'")
+                        .append("\n");
             } else if (valueFile1 instanceof Map || valueFile1 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append("[complex value]").append(" to ").append(valueFile2).append("\n");
-            } else if ((valueFile2 instanceof Map || valueFile2 instanceof Collection) && valueFile1 instanceof String) {
+            } else if ((valueFile2 instanceof Map || valueFile2 instanceof Collection)
+                    && valueFile1 instanceof String) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append("[complex value]").append("\n");
+                        .append("'").append(valueFile1).append("'").append(" to ").append("[complex value]")
+                        .append("\n");
             } else if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
                         .append(valueFile1).append(" to ").append("[complex value]").append("\n");

@@ -25,7 +25,8 @@ public class Formatter {
         }
     }
 
-    public static void changed(Object key, Object valueFile1, Object valueFile2, String format) throws JsonProcessingException {
+    public static void changed(Object key, Object valueFile1, Object valueFile2, String format)
+            throws JsonProcessingException {
         switch (format) {
             case "plain":
                 PlainFormatter.updated(key, valueFile1, valueFile2);
