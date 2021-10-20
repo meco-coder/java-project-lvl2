@@ -1,10 +1,29 @@
 package hexlet.code.formatters;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Set;
 
 public class PlainFormatter {
     private static StringBuilder result = new StringBuilder();
+
+    public static String plainFormat(Map<String, Map<String, ArrayList<Object>>> resultDifferFile1AndFile2) {
+        Set<String> result1 = resultDifferFile1AndFile2.keySet();
+        for (String key : result1) {
+            if (resultDifferFile1AndFile2.get(key).containsKey("add")) {
+                add(key, resultDifferFile1AndFile2.get(key).get("add").get(0));
+            } else if (resultDifferFile1AndFile2.get(key).containsKey("changed")) {
+                changed(key, resultDifferFile1AndFile2.get(key).get("changed").get(0), resultDifferFile1AndFile2
+                        .get(key).get("changed").get(1));
+            } else if (resultDifferFile1AndFile2.get(key).containsKey("removed")) {
+                removed(key);
+            }
+        }
+        String resultToString = result.toString().trim();
+        result = new StringBuilder();
+        return resultToString;
+    }
 
     public static void add(Object key, Object value) {
         if (value instanceof Collection || value instanceof Map) {
@@ -19,7 +38,7 @@ public class PlainFormatter {
         }
     }
 
-    public static void updated(Object key, Object valueFile1, Object valueFile2) {
+    public static void changed(Object key, Object valueFile1, Object valueFile2) {
         if (valueFile1 == null) {
             if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
                 result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
@@ -83,14 +102,7 @@ public class PlainFormatter {
         }
     }
 
-    public static void remove(Object key) {
+    public static void removed(Object key) {
         result.append("Property ").append("'").append(key).append("' ").append("was removed").append("\n");
     }
-
-    public static String getResult() {
-        String resultToString = result.toString().trim();
-        result = new StringBuilder();
-        return resultToString;
-    }
-
 }

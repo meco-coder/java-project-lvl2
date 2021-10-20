@@ -1,29 +1,31 @@
 package hexlet.code.formatters;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+
 public class StylishFormatter {
-    private static StringBuilder result = new StringBuilder("{\n");
-
-    public static void add(Object key, Object value) {
-        result.append("  + ").append(key).append(": ").append(value).append("\n");
-    }
-
-    public static void unchanged(Object key, Object value) {
-        result.append("    ").append(key).append(": ").append(value).append("\n");
-    }
-
-    public static void change(Object key, Object value1, Object value2) {
-        result.append("  - ").append(key).append(": ").append(value1).append("\n")
-                .append("  + ").append(key).append(": ").append(value2).append("\n");
-    }
-
-    public static void remove(Object key, Object value) {
-        result.append("  - ").append(key).append(": ").append(value).append("\n");
-    }
-
-    public static String getResult() {
+    public static String jsonFormat(Map<String, Map<String, ArrayList<Object>>> resultDiffer) {
+        StringBuilder result = new StringBuilder("{\n");
+        Set<String> result1 = resultDiffer.keySet();
+        for (String key : result1) {
+            if (resultDiffer.get(key).containsKey("add")) {
+                result.append("  + ").append(key).append(": ").append(resultDiffer.get(key).get("add").get(0))
+                        .append("\n");
+            } else if (resultDiffer.get(key).containsKey("unchanged")) {
+                result.append("    ").append(key).append(": ").append(resultDiffer.get(key).get("unchanged").get(0))
+                        .append("\n");
+            } else if (resultDiffer.get(key).containsKey("changed")) {
+                result.append("  - ").append(key).append(": ").append(resultDiffer.get(key).get("changed").get(0))
+                        .append("\n")
+                        .append("  + ").append(key).append(": ").append(resultDiffer.get(key).get("changed").get(1))
+                        .append("\n");
+            } else {
+                result.append("  - ").append(key).append(": ").append(resultDiffer.get(key).get("removed").get(0))
+                        .append("\n");
+            }
+        }
         result.append("}");
-        String resultToString = result.toString();
-        result = new StringBuilder("{\n");
-        return resultToString;
+        return result.toString();
     }
 }
