@@ -6,3 +6,6 @@ build
 
 *.swp
 .idea
+*.iml
+xls
+suppressions.xml
