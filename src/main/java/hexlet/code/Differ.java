@@ -61,39 +61,64 @@ public class Differ {
                                                                              TreeMap<String, Object> mapFile2) {
         TreeMap<String, Map<String, ArrayList<Object>>> resultDifferFile1AndFile2 = new TreeMap<>();
         for (String key : sortedFile1AndFile2) {
-            ArrayList<Object> value = new ArrayList<>();
-            Map<String, ArrayList<Object>> resultDiff = new HashMap<>();
             if (!mapFile1.containsKey(key)) {
-                value.add(mapFile2.get(key));
-                resultDiff.put("add", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
+                resultDifferFile1AndFile2.putAll(diffAdd(key, mapFile2.get(key)));
             } else if (mapFile2.containsKey(key) && mapFile1.get(key) != null
                     && mapFile2.get(key) != null && mapFile1.get(key).equals(mapFile2.get(key))) {
-                value.add(mapFile1.get(key));
-                resultDiff.put("unchanged", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
-            } else if (mapFile2.containsKey(key) && mapFile1.get(key) == null
-                    && mapFile2.get(key) == null) {
-                value.add(mapFile1.get(key));
-                resultDiff.put("unchanged", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
-            } else if (mapFile2.containsKey(key)
-                    && (mapFile1.get(key) == null || mapFile2.get(key) == null)) {
-                value.add(mapFile1.get(key));
-                value.add(mapFile2.get(key));
-                resultDiff.put("changed", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
+                resultDifferFile1AndFile2.putAll(diffUnchanged(key, mapFile1.get(key)));
+            } else if (mapFile2.containsKey(key) && mapFile1.get(key) == null && mapFile2.get(key) == null) {
+                resultDifferFile1AndFile2.putAll(diffUnchanged(key, mapFile2.get(key)));
+            } else if (mapFile2.containsKey(key) && (mapFile1.get(key) == null || mapFile2.get(key) == null)) {
+                resultDifferFile1AndFile2.putAll(diffChanged(key, mapFile1.get(key),mapFile2.get(key)));
             } else if (mapFile2.containsKey(key) && !mapFile1.get(key).equals(mapFile2.get(key))) {
-                value.add(mapFile1.get(key));
-                value.add(mapFile2.get(key));
-                resultDiff.put("changed", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
+                resultDifferFile1AndFile2.putAll(diffChanged(key, mapFile1.get(key),mapFile2.get(key)));
             } else {
-                value.add(mapFile1.get(key));
-                resultDiff.put("removed", value);
-                resultDifferFile1AndFile2.put(key, resultDiff);
+                resultDifferFile1AndFile2.putAll(diffRemoved(key, mapFile1.get(key)));
             }
         }
         return resultDifferFile1AndFile2;
     }
+
+    public static TreeMap<String, Map<String, ArrayList<Object>>> diffAdd(String key, Object value) {
+        TreeMap<String, Map<String, ArrayList<Object>>> resultDiffAdd = new TreeMap<>();
+        ArrayList<Object> value1 = new ArrayList<>();
+        Map<String, ArrayList<Object>> resultDiff = new HashMap<>();
+        value1.add(value);
+        resultDiff.put("add", value1);
+        resultDiffAdd.put(key, resultDiff);
+        return resultDiffAdd;
+    }
+
+    public static TreeMap<String, Map<String, ArrayList<Object>>> diffUnchanged(String key, Object value) {
+        TreeMap<String, Map<String, ArrayList<Object>>> resultDiffUnchanged = new TreeMap<>();
+        ArrayList<Object> value1 = new ArrayList<>();
+        Map<String, ArrayList<Object>> resultDiff = new HashMap<>();
+        value1.add(value);
+        resultDiff.put("unchanged", value1);
+        resultDiffUnchanged.put(key, resultDiff);
+        return resultDiffUnchanged;
+    }
+
+    public static TreeMap<String, Map<String, ArrayList<Object>>> diffChanged(String key, Object valueFile1,
+                                                                              Object valueFile2) {
+        TreeMap<String, Map<String, ArrayList<Object>>> resultDiffChanged = new TreeMap<>();
+        ArrayList<Object> value1 = new ArrayList<>();
+        Map<String, ArrayList<Object>> resultDiff = new HashMap<>();
+        value1.add(valueFile1);
+        value1.add(valueFile2);
+        resultDiff.put("changed", value1);
+        resultDiffChanged.put(key, resultDiff);
+        return resultDiffChanged;
+    }
+
+    public static TreeMap<String, Map<String, ArrayList<Object>>> diffRemoved(String key, Object value) {
+        TreeMap<String, Map<String, ArrayList<Object>>> resultDiffRemoved = new TreeMap<>();
+        ArrayList<Object> value1 = new ArrayList<>();
+        Map<String, ArrayList<Object>> resultDiff = new HashMap<>();
+        value1.add(value);
+        resultDiff.put("removed", value1);
+        resultDiffRemoved.put(key, resultDiff);
+        return resultDiffRemoved;
+    }
 }
+
