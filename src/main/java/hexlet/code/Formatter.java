@@ -10,18 +10,21 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String format(Map<String, Map<String, ArrayList<Object>>> resultDifferFile1AndFile2, String format)
+    public static String format(Map<String, Map<String, ArrayList<Object>>> diff, String format)
             throws JsonProcessingException {
         String result = "";
         switch (format) {
             case "plain":
-                result = PlainFormatter.plainFormat(resultDifferFile1AndFile2);
+                result = PlainFormatter.plainFormat(diff);
                 break;
             case "json":
-                result = JsonFormatter.jsonFormat(resultDifferFile1AndFile2);
+                result = JsonFormatter.jsonFormat(diff);
+                break;
+            case "stylish":
+                result = StylishFormatter.jsonFormat(diff);
                 break;
             default:
-                result = StylishFormatter.jsonFormat(resultDifferFile1AndFile2);
+                throw new RuntimeException();
         }
         return result;
     }

@@ -9,20 +9,14 @@ import java.util.TreeMap;
 
 public class Parser {
 
-    public final TreeMap<String, Object> parserForFile1AndFile2(String data, String formatFile) throws IOException {
-        TreeMap<String, Object> mapFile = new TreeMap<>();
-        if (formatFile.equals("yml")) {
-            ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            mapper.findAndRegisterModules();
-            mapFile = mapper.readValue(data, new TypeReference<>() {
-            });
-            return mapFile;
-        } else if (formatFile.equals("json")) {
-            ObjectMapper mapper = new ObjectMapper();
-            mapFile = mapper.readValue(data, new TypeReference<>() {
-            });
-            return mapFile;
+    public final TreeMap<String, Object> parse(String data, String format) throws IOException {
+        TreeMap<String, Object> mapFile;
+        ObjectMapper mapper = new ObjectMapper();
+        if (format.equals("yml")) {
+            mapper = new ObjectMapper(new YAMLFactory());
         }
+        mapFile = mapper.readValue(data, new TypeReference<>() {
+        });
         return mapFile;
     }
 }

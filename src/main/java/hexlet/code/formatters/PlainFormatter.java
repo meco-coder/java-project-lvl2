@@ -6,103 +6,50 @@ import java.util.Map;
 import java.util.Set;
 
 public class PlainFormatter {
-    private static StringBuilder result = new StringBuilder();
 
-    public static String plainFormat(Map<String, Map<String, ArrayList<Object>>> resultDifferFile1AndFile2) {
-        Set<String> result1 = resultDifferFile1AndFile2.keySet();
-        for (String key : result1) {
-            if (resultDifferFile1AndFile2.get(key).containsKey("add")) {
-                add(key, resultDifferFile1AndFile2.get(key).get("add").get(0));
-            } else if (resultDifferFile1AndFile2.get(key).containsKey("changed")) {
-                changed(key, resultDifferFile1AndFile2.get(key).get("changed").get(0), resultDifferFile1AndFile2
-                        .get(key).get("changed").get(1));
-            } else if (resultDifferFile1AndFile2.get(key).containsKey("removed")) {
-                removed(key);
+    public static String plainFormat(Map<String, Map<String, ArrayList<Object>>> diff) {
+        StringBuilder resultDiff = new StringBuilder();
+        Set<String> keys = diff.keySet();
+        for (String key : keys) {
+            if (diff.get(key).containsKey("add")) {
+                resultDiff.append(add(key, diff.get(key).get("add").get(0)));
+            } else if (diff.get(key).containsKey("changed")) {
+                resultDiff.append(changed(key, diff.get(key).get("changed").get(0), diff
+                        .get(key).get("changed").get(1)));
+            } else if (diff.get(key).containsKey("removed")) {
+                resultDiff.append(removed(key));
             }
         }
-        String resultToString = result.toString().trim();
-        result = new StringBuilder();
-        return resultToString;
+        return resultDiff.toString().trim();
     }
 
-    public static void add(Object key, Object value) {
+    public static StringBuilder add(Object key, Object value) {
+        StringBuilder resultAdd = new StringBuilder();
+        value = filterValue(value);
+        return resultAdd.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
+                .append(value).append("\n");
+    }
+
+    public static StringBuilder changed(Object key, Object valueFile1, Object valueFile2) {
+        StringBuilder resultChanged = new StringBuilder();
+        valueFile1 = filterValue(valueFile1);
+        valueFile2 = filterValue(valueFile2);
+        return resultChanged.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
+                .append(valueFile1).append(" to ").append(valueFile2).append("\n");
+    }
+
+    public static StringBuilder removed(Object key) {
+        StringBuilder resultRemoved = new StringBuilder();
+        return resultRemoved.append("Property ").append("'").append(key).append("' ").append("was removed")
+                .append("\n");
+    }
+
+    public static Object filterValue(Object value) {
         if (value instanceof Collection || value instanceof Map) {
-            result.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
-                    .append("[complex value]").append("\n");
+            return "[complex value]";
         } else if (value instanceof String) {
-            result.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
-                    .append("'").append(value).append("'").append("\n");
-        } else {
-            result.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
-                    .append(value).append("\n");
+            return "'" + value + "'";
         }
-    }
-
-    public static void changed(Object key, Object valueFile1, Object valueFile2) {
-        if (valueFile1 == null) {
-            if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append((Object) null).append(" to ").append("[complex value]").append("\n");
-            } else if (valueFile2 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append((Object) null).append(" to ").append("'").append(valueFile2).append("'").append("\n");
-            } else {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append((Object) null).append(" to ").append(valueFile2).append("\n");
-            }
-        }
-        if (valueFile2 == null) {
-            if (valueFile1 instanceof Map || valueFile1 instanceof Collection) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append((Object) null).append("\n");
-            } else if (valueFile1 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append((Object) null).append("\n");
-            } else {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(valueFile1).append(" to ").append((Object) null).append("\n");
-            }
-        }
-        if (valueFile1 != null && valueFile2 != null) {
-            if ((valueFile1 instanceof Map || valueFile1 instanceof Collection)
-                    && (valueFile2 instanceof Map || valueFile2 instanceof Collection)) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append("[complex value]").append("\n");
-            } else if (valueFile1 instanceof String && valueFile2 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append("'").append(valueFile2)
-                        .append("'")
-                        .append("\n");
-            } else if ((valueFile1 instanceof Map || valueFile1 instanceof Collection)
-                    && valueFile2 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append("'").append(valueFile2).append("'")
-                        .append("\n");
-            } else if (valueFile1 instanceof Map || valueFile1 instanceof Collection) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("[complex value]").append(" to ").append(valueFile2).append("\n");
-            } else if ((valueFile2 instanceof Map || valueFile2 instanceof Collection)
-                    && valueFile1 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append("[complex value]")
-                        .append("\n");
-            } else if (valueFile2 instanceof Map || valueFile2 instanceof Collection) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(valueFile1).append(" to ").append("[complex value]").append("\n");
-            } else if (valueFile1 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append("'").append(valueFile1).append("'").append(" to ").append(valueFile2).append("\n");
-            } else if (valueFile2 instanceof String) {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(valueFile1).append(" to ").append("'").append(valueFile2).append("'").append("\n");
-            } else {
-                result.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                        .append(valueFile1).append(" to ").append(valueFile2).append("\n");
-            }
-        }
-    }
-
-    public static void removed(Object key) {
-        result.append("Property ").append("'").append(key).append("' ").append("was removed").append("\n");
+        return value;
     }
 }
