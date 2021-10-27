@@ -10,13 +10,13 @@ import java.util.TreeMap;
 public class Parser {
 
     public final TreeMap<String, Object> parse(String data, String format) throws IOException {
-        TreeMap<String, Object> mapFile;
+        TreeMap<String, Object> mapData;
         ObjectMapper mapper = new ObjectMapper();
         if (format.equals("yml")) {
             mapper = new ObjectMapper(new YAMLFactory());
         }
-        mapFile = mapper.readValue(data, new TypeReference<>() {
+        mapData = mapper.readValue(data, new TypeReference<>() {
         });
-        return mapFile;
+        return mapData;
     }
 }

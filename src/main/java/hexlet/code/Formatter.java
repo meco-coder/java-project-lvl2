@@ -21,7 +21,7 @@ public class Formatter {
                 result = JsonFormatter.jsonFormat(diff);
                 break;
             case "stylish":
-                result = StylishFormatter.jsonFormat(diff);
+                result = StylishFormatter.stylishFormat(diff);
                 break;
             default:
                 throw new RuntimeException();

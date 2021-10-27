@@ -7,5 +7,5 @@ build
 *.swp
 .idea
 *.iml
-xls
-suppressions.xml
+/suppressions.xml
+xsl/
