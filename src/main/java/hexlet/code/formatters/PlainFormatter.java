@@ -1,14 +1,14 @@
 package hexlet.code.formatters;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class PlainFormatter {
 
-    public static String plainFormat(Map<String, Map<String, ArrayList<Object>>> diff) {
-        StringBuilder resultDiff = new StringBuilder();
+    public static String plainFormat(Map<String, Map<String, List<Object>>> diff) {
+        final StringBuilder resultDiff = new StringBuilder();
         Set<String> keys = diff.keySet();
         for (String key : keys) {
             if (diff.get(key).containsKey("add")) {
@@ -24,14 +24,14 @@ public class PlainFormatter {
     }
 
     public static StringBuilder add(Object key, Object value) {
-        StringBuilder resultAdd = new StringBuilder();
+        final StringBuilder resultAdd = new StringBuilder();
         value = filterValue(value);
         return resultAdd.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
                 .append(value).append("\n");
     }
 
     public static StringBuilder changed(Object key, Object valueFile1, Object valueFile2) {
-        StringBuilder resultChanged = new StringBuilder();
+        final StringBuilder resultChanged = new StringBuilder();
         valueFile1 = filterValue(valueFile1);
         valueFile2 = filterValue(valueFile2);
         return resultChanged.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
@@ -39,7 +39,7 @@ public class PlainFormatter {
     }
 
     public static StringBuilder removed(Object key) {
-        StringBuilder resultRemoved = new StringBuilder();
+        final StringBuilder resultRemoved = new StringBuilder();
         return resultRemoved.append("Property ").append("'").append(key).append("' ").append("was removed")
                 .append("\n");
     }

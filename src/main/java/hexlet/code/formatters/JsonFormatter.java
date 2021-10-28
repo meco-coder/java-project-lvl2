@@ -3,16 +3,16 @@ package hexlet.code.formatters;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class JsonFormatter {
-    public static String jsonFormat(Map<String, Map<String, ArrayList<Object>>> diff)
+    public static String jsonFormat(Map<String, Map<String, List<Object>>> diff)
             throws JsonProcessingException {
-        String resultToString = "";
-        HashMap<Object, Object> resultDiff = new HashMap<>();
+        final String resultToString;
+        final HashMap<Object, Object> resultDiff = new HashMap<>();
         Set<String> keys = diff.keySet();
         for (String key : keys) {
             if (diff.get(key).containsKey("add")) {
@@ -23,7 +23,7 @@ public class JsonFormatter {
                 resultDiff.put(key, diff.get(key).get("removed").get(0));
             }
         }
-        ObjectMapper objectMapper = new ObjectMapper();
+        final ObjectMapper objectMapper = new ObjectMapper();
         resultToString = objectMapper.writeValueAsString(resultDiff);
         return resultToString;
     }

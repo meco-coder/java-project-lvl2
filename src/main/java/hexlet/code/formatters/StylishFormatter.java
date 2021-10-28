@@ -1,11 +1,11 @@
 package hexlet.code.formatters;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class StylishFormatter {
-    public static String stylishFormat(Map<String, Map<String, ArrayList<Object>>> resultDiffer) {
+    public static String stylishFormat(Map<String, Map<String, List<Object>>> resultDiffer) {
         StringBuilder resultDiff = new StringBuilder("{\n");
         Set<String> keys = resultDiffer.keySet();
         for (String key : keys) {
