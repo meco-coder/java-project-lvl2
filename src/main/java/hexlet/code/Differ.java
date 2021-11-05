@@ -4,7 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 public class Differ {
 
@@ -63,8 +70,8 @@ public class Differ {
                 diff.put("unchanged", value);
                 resultDiff.put(key, diff);
             }
-            if (!Objects.equals(mapFile1.get(key), mapFile2.get(key)) &&
-                    (mapFile1.containsKey(key) && mapFile2.containsKey(key))) {
+            if (!Objects.equals(mapFile1.get(key), mapFile2.get(key))
+                    && (mapFile1.containsKey(key) && mapFile2.containsKey(key))) {
                 value.add(mapFile1.get(key));
                 value.add(mapFile2.get(key));
                 diff.put("changed", value);
