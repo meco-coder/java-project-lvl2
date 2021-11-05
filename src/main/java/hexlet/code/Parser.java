@@ -11,17 +11,11 @@ import java.util.Map;
 public class Parser {
 
     public static Map<String, Object> parse(String data, String format) throws IOException {
-        final ObjectMapper mapper;
-        switch (format) {
-            case "yml":
-                mapper = new ObjectMapper(new YAMLFactory());
-                break;
-            case "json":
-                mapper = new ObjectMapper(new JsonFactory());
-                break;
-            default:
-                throw new RuntimeException();
-        }
+        final ObjectMapper mapper = switch (format) {
+            case "yml" -> new ObjectMapper(new YAMLFactory());
+            case "json" -> new ObjectMapper(new JsonFactory());
+            default -> throw new RuntimeException();
+        };
         return mapper.readValue(data, new TypeReference<>() {
         });
 

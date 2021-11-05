@@ -12,21 +12,12 @@ public class Formatter {
 
     public static String format(Map<String, Map<String, List<Object>>> diff, String format)
             throws JsonProcessingException {
-        final String result;
-        switch (format) {
-            case "plain":
-                result = PlainFormatter.plainFormat(diff);
-                break;
-            case "json":
-                result = JsonFormatter.jsonFormat(diff);
-                break;
-            case "stylish":
-                result = StylishFormatter.stylishFormat(diff);
-                break;
-            default:
-                throw new RuntimeException();
-        }
-        return result;
+        return switch (format) {
+            case "plain" -> PlainFormatter.plainFormat(diff);
+            case "json" -> JsonFormatter.jsonFormat(diff);
+            case "stylish" -> StylishFormatter.stylishFormat(diff);
+            default -> throw new RuntimeException();
+        };
     }
 
 }

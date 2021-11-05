@@ -7,17 +7,30 @@ import java.util.Set;
 
 public class PlainFormatter {
 
+    private static final String ADD_TEMPLATE = "Property '%s' was added with value: %s\n";
+    private static final String CHANGED_TEMPLATE = "Property '%s' was updated. From %s to %s\n";
+    private static final String REMOVED_TEMPLATE = "Property '%s' was removed\n";
+
     public static String plainFormat(Map<String, Map<String, List<Object>>> diff) {
         final StringBuilder resultDiff = new StringBuilder();
-        Set<String> keys = diff.keySet();
+        final Set<String> keys = diff.keySet();
         for (String key : keys) {
-            if (diff.get(key).containsKey("add")) {
-                resultDiff.append(add(key, diff.get(key).get("add").get(0)));
-            } else if (diff.get(key).containsKey("changed")) {
-                resultDiff.append(changed(key, diff.get(key).get("changed").get(0), diff
-                        .get(key).get("changed").get(1)));
-            } else if (diff.get(key).containsKey("removed")) {
-                resultDiff.append(removed(key));
+            final String keyOfValue = String.join("", diff.get(key).keySet());
+            switch (keyOfValue) {
+                case "add":
+                    resultDiff.append(add(key, diff.get(key).get("add").get(0)));
+                    break;
+                case "changed":
+                    resultDiff.append(changed(key, diff.get(key).get("changed").get(0),
+                            diff.get(key).get("changed").get(1)));
+                    break;
+                case "removed":
+                    resultDiff.append(removed(key));
+                    break;
+                case "unchanged":
+                    break;
+                default:
+                    throw new RuntimeException();
             }
         }
         return resultDiff.toString().trim();
@@ -25,29 +38,25 @@ public class PlainFormatter {
 
     public static StringBuilder add(Object key, Object value) {
         final StringBuilder resultAdd = new StringBuilder();
-        value = filterValue(value);
-        return resultAdd.append("Property ").append("'").append(key).append("' ").append("was added with value: ")
-                .append(value).append("\n");
+        return resultAdd.append(String.format(ADD_TEMPLATE, key, stringifyValue(value)));
     }
 
     public static StringBuilder changed(Object key, Object valueFile1, Object valueFile2) {
         final StringBuilder resultChanged = new StringBuilder();
-        valueFile1 = filterValue(valueFile1);
-        valueFile2 = filterValue(valueFile2);
-        return resultChanged.append("Property ").append("'").append(key).append("' ").append("was updated. From ")
-                .append(valueFile1).append(" to ").append(valueFile2).append("\n");
+        return resultChanged.append(String.format(CHANGED_TEMPLATE, key, stringifyValue(valueFile1),
+                stringifyValue(valueFile2)));
     }
 
     public static StringBuilder removed(Object key) {
         final StringBuilder resultRemoved = new StringBuilder();
-        return resultRemoved.append("Property ").append("'").append(key).append("' ").append("was removed")
-                .append("\n");
+        return resultRemoved.append(String.format(REMOVED_TEMPLATE, key));
     }
 
-    public static Object filterValue(Object value) {
+    public static Object stringifyValue(Object value) {
         if (value instanceof Collection || value instanceof Map) {
             return "[complex value]";
-        } else if (value instanceof String) {
+        }
+        if (value instanceof String) {
             return "'" + value + "'";
         }
         return value;
