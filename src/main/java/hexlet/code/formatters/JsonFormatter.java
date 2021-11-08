@@ -15,25 +15,34 @@ public class JsonFormatter {
         final Set<String> keys = diff.keySet();
         for (String key : keys) {
             final String keyOfValue = String.join("", diff.get(key).keySet());
-            switch (keyOfValue) {
-                case "add":
-                    resultDiff.put(key, diff.get(key).get("add").get(0));
-                    break;
-                case "changed":
-                    resultDiff.put(key, diff.get(key).get("changed").get(1));
-                    break;
-                case "removed":
-                    resultDiff.put(key, diff.get(key).get("removed").get(0));
-                    break;
-                case "unchanged":
-                    break;
-                default:
-                    throw new RuntimeException();
-            }
+            resultDiff.putAll(formatDiff(keyOfValue, key, diff));
         }
         final ObjectMapper objectMapper = new ObjectMapper();
-        final String diffAsJson;
-        diffAsJson = objectMapper.writeValueAsString(resultDiff);
-        return diffAsJson;
+        return objectMapper.writeValueAsString(resultDiff);
+    }
+
+    public static HashMap<Object, Object> formatDiff(String keyOfValue, String key,
+                                                     Map<String, Map<String, List<Object>>> diff) {
+        final HashMap<Object, Object> resultFormatDiff = new HashMap<>();
+        switch (keyOfValue) {
+            case "add" -> {
+                resultFormatDiff.put(key, diff.get(key).get("add").get(0));
+                return resultFormatDiff;
+            }
+            case "changed" -> {
+                resultFormatDiff.put(key, diff.get(key).get("changed").get(1));
+                return resultFormatDiff;
+            }
+
+            case "removed" -> {
+                resultFormatDiff.put(key, diff.get(key).get("removed").get(0));
+                return resultFormatDiff;
+            }
+            case "unchanged" -> {
+                return resultFormatDiff;
+            }
+
+            default -> throw new RuntimeException();
+        }
     }
 }

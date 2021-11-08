@@ -16,22 +16,7 @@ public class PlainFormatter {
         final Set<String> keys = diff.keySet();
         for (String key : keys) {
             final String keyFromValue = String.join("", diff.get(key).keySet());
-            switch (keyFromValue) {
-                case "add":
-                    resultDiff.append(add(key, diff.get(key).get("add").get(0)));
-                    break;
-                case "changed":
-                    resultDiff.append(changed(key, diff.get(key).get("changed").get(0),
-                            diff.get(key).get("changed").get(1)));
-                    break;
-                case "removed":
-                    resultDiff.append(removed(key));
-                    break;
-                case "unchanged":
-                    break;
-                default:
-                    throw new RuntimeException();
-            }
+            resultDiff.append(formatDiff(keyFromValue, key, diff));
         }
         return resultDiff.toString().trim();
     }
@@ -60,5 +45,26 @@ public class PlainFormatter {
             return "'" + value + "'";
         }
         return value;
+    }
+
+    public static StringBuilder formatDiff(String keyFromValue, String key,
+                                           Map<String, Map<String, List<Object>>> diff) {
+        final StringBuilder resultFormatDiff = new StringBuilder();
+        switch (keyFromValue) {
+            case "add" -> {
+                return resultFormatDiff.append(add(key, diff.get(key).get("add").get(0)));
+            }
+            case "changed" -> {
+                return resultFormatDiff.append(changed(key, diff.get(key).get("changed").get(0),
+                        diff.get(key).get("changed").get(1)));
+            }
+            case "removed" -> {
+                return resultFormatDiff.append(removed(key));
+            }
+            case "unchanged" -> {
+                return resultFormatDiff;
+            }
+            default -> throw new RuntimeException();
+        }
     }
 }
